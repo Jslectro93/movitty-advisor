@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Movitty Advisor Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c8cde",
+                        "background-light": "#ffffff",
+                        "background-dark": "#f8f9fa",
+                        "glass": "rgba(255, 255, 255, 0.8)",
+                        "glass-border": "rgba(140, 140, 222, 0.1)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.25rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        .glass-card {
+            background: #ffffff;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(140, 140, 222, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-dark font-display text-slate-800 min-h-screen pb-24">
+<!-- Header Section -->
+<header class="sticky top-0 z-50 glass-card border-b border-primary/10 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full border-2 border-primary/50 p-0.5">
+<div class="size-full rounded-full bg-cover bg-center" data-alt="Advisor profile avatar portrait" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAo6-sECgk2N3wwHE4Oyx_HHlCC62o2x2FL3dIQTe_F3RWTTeB7kDicCvBPgn_mtXFbILdcnuqOu5iiYiUnQ62rFuPIjeg5alZABx0DfUjfNhGbA2pDH4kvqiG_L10fBOVO4tdiPdUybONXFOb8J4NBYoEcS72pwXshlLOg1pZY_yaXyV9PohRxJRhGC8zyzIscJLfCxwpyHArk4BbUp4SFgucsZjzymOoBU8eSkoNymfunsJDTAsGH5Zy0Kp9D5wi9x3LpPq2Vibpg')"></div>
+</div>
+<div>
+<h1 class="text-sm font-bold tracking-tight text-primary">MOVITTY</h1>
+<p class="text-[10px] uppercase tracking-widest opacity-60">Advisor Pro</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center rounded-xl glass-card text-slate-600">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-xl glass-card relative text-slate-600">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full neon-glow"></span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="px-4 pt-6 pb-4">
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-transparent p-6 border border-primary/10">
+<div class="relative z-10">
+<h2 class="text-2xl font-bold tracking-tight mb-1">Welcome, Advisor</h2>
+<p class="text-slate-600 text-sm max-w-[240px]">Optimizing your market insights today with AI-driven valuation.</p>
+<div class="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-wider shadow-sm"><span class="size-1.5 rounded-full bg-primary"></span> Premium Light Mode Active</div>
+</div>
+<div class="absolute -right-8 -bottom-8 size-40 bg-primary/10 rounded-full blur-3xl"></div>
+</div>
+</section>
+<!-- Stats Row -->
+<section class="grid grid-cols-3 gap-3 px-4 mb-8">
+<div class="glass-card rounded-xl p-3 border-l-2 border-l-primary">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Vehicles</p>
+<p class="text-lg font-bold text-slate-900">+8M</p>
+<p class="text-[10px] text-emerald-400 font-medium flex items-center">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> 12%
+            </p>
+</div>
+<div class="glass-card rounded-xl p-3 border-l-2 border-l-primary/60">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Dealers</p>
+<p class="text-lg font-bold text-slate-900">+45K</p>
+<p class="text-[10px] text-emerald-400 font-medium flex items-center">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> 5%
+            </p>
+</div>
+<div class="glass-card rounded-xl p-3 border-l-2 border-l-primary/30">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Markets</p>
+<p class="text-lg font-bold text-slate-900">+120</p>
+<p class="text-[10px] text-emerald-400 font-medium flex items-center">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> 8%
+            </p>
+</div>
+</section>
+<!-- Top Imperdibles Section -->
+<section class="px-4 mb-8">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold flex items-center gap-2">
+                🔥 <span class="tracking-tight">Top 3 Imperdibles</span>
+</h3>
+<a class="text-primary text-xs font-semibold" href="#">View All</a>
+</div>
+<div class="grid gap-4">
+<!-- Deal Card 1 -->
+<div class="glass-card rounded-2xl overflow-hidden border border-primary/20">
+<div class="h-32 bg-cover bg-center relative" data-alt="Modern electric sedan front view" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBc4L-wn0ELi23jlrEWv6oLQjmkrVQOKx49qg6hwV6C_wFsSO8u6nT5tWn3_LrmtjOCQNNMjhZ7qb7Hzed-2-M-ZKlIQtMVeyuParR5zBvi2VzlP8WF9bW0MNlyvSCNFLb8Tiub18oKWFF_9d_9P9y1ONzsOgf4MJPrwOyzPzEebWGx76tHTYeVqHxOkWWQes7BacWHzmzSgljPzAT7D22nVrCv8OpXgwnzCiJCwl4jjuWIUD4nN8OborvKjB7u_pZQ4doZxgVpRFVJ')">
+<div class="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg neon-glow">
+                        💰 Ahorro de $2,400
+                    </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-900">2024 Tesla Model 3</h4>
+<p class="text-xs text-slate-500">Long Range • 1,200 mi</p>
+</div>
+<span class="material-symbols-outlined text-primary">bookmark</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="text-2xl font-bold tracking-tight text-slate-900">$38,500</span>
+<span class="text-sm text-slate-500 line-through mb-1">$40,900 Avg.</span>
+</div>
+</div>
+</div>
+<!-- Deal Card 2 -->
+<div class="glass-card rounded-2xl overflow-hidden border border-primary/10">
+<div class="h-32 bg-cover bg-center relative" data-alt="Luxury SUV on mountain road" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJ00HcHQ45xBAdPJuNyMJ82mVxVrzdngXCs1vQM_8wg2xifH-hSr4-VcNxGVI2SPVcVeMPDHmsyDaBj9RoFKX5CLXAotJoVVzq2BdLBdFNGdSsZ9Uc9CYrtgCHNoUgOFIfK8i5dLtPfj_E_ljPa1Sojt-Ywqa9apLznCInOJZcrVPw3UH5LcNkd3p5NA7LWHy5R0COFMUaQykpdSvWH65asDzcpD9q1QrCUFyzYV0m08JvZbOFatL5je1miTwMtNu5o2eNiwZnRGEh')">
+<div class="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg">
+                        💰 Ahorro de $1,850
+                    </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-900">2023 BMW X5</h4>
+<p class="text-xs text-slate-500">xDrive40i • 12,400 mi</p>
+</div>
+<span class="material-symbols-outlined text-slate-500">bookmark</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="text-2xl font-bold tracking-tight text-slate-900">$54,200</span>
+<span class="text-sm text-slate-500 line-through mb-1">$56,050 Avg.</span>
+</div>
+</div>
+</div>
+<!-- Deal Card 3 -->
+<div class="glass-card rounded-2xl overflow-hidden border border-primary/10">
+<div class="h-32 bg-cover bg-center relative" data-alt="Compact sports car in city studio" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBS0lJt3uyZFX_0fgzqhDVdRZtoz3D3SLkIfnwpwAkFaXJqHGEGXkFr0A7r5AuqrpLnuzeI14YE6eS9LqcwSuWbRlkjUcsL7or5UV3vATLJKf31KlNW0ScLZqjRfVaT-Tf2WT5R98cSu4N22H2fOxn0jkfFzam4MP0OeWDZy5X8B2vbeRKPTmLUcrFNwEQgIUyyg0JpVadqk_xtXYCxkDOlFUSeREYQ9n2sHfOrDVPelFSqmPTztkE8CFH1IbhAxajGK-3WWJFBZ1Ai')">
+<div class="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg">
+                        💰 Ahorro de $3,100
+                    </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-900">2024 Porsche Taycan</h4>
+<p class="text-xs text-slate-500">Base • 500 mi</p>
+</div>
+<span class="material-symbols-outlined text-slate-500">bookmark</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="text-2xl font-bold tracking-tight text-slate-900">$92,800</span>
+<span class="text-sm text-slate-500 line-through mb-1">$95,900 Avg.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Searches -->
+<section class="px-4 mb-6">
+<h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Recent Searches</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 glass-card rounded-xl border border-primary/5">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-800">"Electric SUVs under $50k in Miami"</p>
+<p class="text-[10px] text-slate-500">Natural Language Search • 2m ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600 text-sm">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 glass-card rounded-xl border border-primary/5">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">barcode_scanner</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-800">VIN: 1HGCM82633A004...</p>
+<p class="text-[10px] text-slate-500">VIN Lookup • 1h ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600 text-sm">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 glass-card border-t pb-6 pt-3 px-6 border-slate-100">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-[10px] font-medium">Market</span>
+</a>
+<div class="relative -top-8 size-14 rounded-full bg-primary flex items-center justify-center text-white neon-glow shadow-xl shadow-primary/30 border-4 border-white">
+<span class="material-symbols-outlined text-3xl">add</span>
+</div>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">local_fire_department</span>
+<span class="text-[10px] font-medium">Deals</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

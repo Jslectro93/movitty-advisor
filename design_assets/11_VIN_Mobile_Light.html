@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#8c8cde",
+            "background-light": "#ffffff",
+            "background-dark": "#f8fafc",
+          },
+          fontFamily: {
+            "display": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<title>Movitty Advisor Platform - VIN Intelligence</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 font-display text-slate-900 min-h-screen">
+<div class="max-w-5xl mx-auto pb-24">
+<!-- Header -->
+<header class="flex items-center justify-between p-6 border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight">Movitty Advisor</h1>
+<p class="text-xs text-slate-500 uppercase tracking-widest font-semibold">Intelligence Platform</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center justify-center p-2 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="flex items-center justify-center p-2 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</header>
+<!-- Search Section -->
+<section class="p-6">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-primary">search</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-xl shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent text-lg font-medium transition-all placeholder:text-slate-400" placeholder="Enter 17-character VIN for deep intelligence..." type="text" value="1FTFW1E84KFA3XXXX"/>
+<div class="absolute inset-y-2 right-2">
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg font-bold text-sm h-full transition-all">
+            ANALYZE
+          </button>
+</div>
+</div>
+</section>
+<!-- Hero Spec Block -->
+<section class="px-6 py-4">
+<div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+<div class="p-6 border-b border-slate-100 flex justify-between items-end">
+<div>
+<span class="inline-block px-2 py-1 rounded bg-primary text-white text-[10px] font-bold uppercase mb-2">Verified Data</span>
+<h2 class="text-3xl font-bold">2023 Ford F-150</h2>
+<p class="text-slate-500 dark:text-slate-400">SuperCrew Cab • 5.5' Box • Lariat Sport 4WD</p>
+</div>
+<div class="text-right">
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tighter">Odometer Estimate</p>
+<p class="text-2xl font-bold text-primary">12,482 <span class="text-sm font-medium">mi</span></p>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-slate-100">
+<div class="p-6 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">settings_input_component</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Engine</p>
+<p class="text-sm font-semibold">3.5L V6 EcoBoost</p>
+</div>
+</div>
+<div class="p-6 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">settings_suggest</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Transmission</p>
+<p class="text-sm font-semibold">10-Speed Auto</p>
+</div>
+</div>
+<div class="p-6 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">stars</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Trim Level</p>
+<p class="text-sm font-semibold">Lariat High</p>
+</div>
+</div>
+<div class="p-6 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">terrain</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Drive Type</p>
+<p class="text-sm font-semibold">4WD System</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Fair Market Value (FMV) Cards -->
+<section class="p-6">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">payments</span>
+        Fair Market Value (FMV)
+      </h3>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Low -->
+<div class="bg-white border border-slate-200 p-5 rounded-xl hover:shadow-md transition-all group shadow-sm">
+<p class="text-xs font-bold text-red-500 uppercase mb-1">Low Range</p>
+<p class="text-2xl font-bold tracking-tight">$54,200</p>
+<div class="mt-3 flex items-center gap-1 text-[10px] text-slate-500">
+<span class="material-symbols-outlined text-xs">trending_down</span>
+            Trade-in Floor
+          </div>
+</div>
+<!-- Avg -->
+<div class="bg-white border border-slate-200 p-5 rounded-xl hover:shadow-md transition-all group shadow-sm">
+<p class="text-xs font-bold text-primary uppercase mb-1">Average</p>
+<p class="text-2xl font-bold tracking-tight">$58,750</p>
+<div class="mt-3 flex items-center gap-1 text-[10px] text-slate-500">
+<span class="material-symbols-outlined text-xs">equalizer</span>
+            Market Mean
+          </div>
+</div>
+<!-- Median -->
+<div class="bg-white border border-slate-200 p-5 rounded-xl hover:shadow-md transition-all group shadow-sm">
+<p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase mb-1">Median</p>
+<p class="text-2xl font-bold tracking-tight">$59,100</p>
+<div class="mt-3 flex items-center gap-1 text-[10px] text-slate-500">
+<span class="material-symbols-outlined text-xs">remove</span>
+            Mid-point
+          </div>
+</div>
+<!-- High -->
+<div class="bg-white border border-slate-200 p-5 rounded-xl hover:shadow-md transition-all group shadow-sm">
+<p class="text-xs font-bold text-emerald-500 uppercase mb-1">Retail High</p>
+<p class="text-2xl font-bold tracking-tight">$64,900</p>
+<div class="mt-3 flex items-center gap-1 text-[10px] text-slate-500">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+            CPO Premium
+          </div>
+</div>
+</div>
+</section>
+<!-- Price History Chart -->
+<section class="p-6">
+<div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-lg font-bold">Price Appreciation Index</h3>
+<p class="text-sm text-slate-500">12-month value retention analysis</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full">Retail</span>
+<span class="px-3 py-1 bg-slate-100 text-slate-500 text-xs font-bold rounded-full">Auction</span>
+</div>
+</div>
+<!-- Mock Line Chart Container -->
+<div class="relative h-64 w-full">
+<div class="absolute bottom-0 w-full h-px bg-slate-200 dark:bg-primary/20"></div>
+<div class="absolute left-0 h-full w-px bg-slate-200 dark:bg-primary/20"></div>
+<!-- SVG Line -->
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#8c8cde" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#8c8cde" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,80 Q25,75 40,60 T70,45 T100,30" fill="none" stroke="#8c8cde" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<path d="M0,80 Q25,75 40,60 T70,45 T100,30 V100 H0 Z" fill="url(#chartGradient)" vector-effect="non-scaling-stroke"></path>
+<!-- Tooltip Line Mockup -->
+<line stroke="#8c8cde" stroke-dasharray="4" stroke-width="1" vector-effect="non-scaling-stroke" x1="70" x2="70" y1="0" y2="100"></line>
+<circle cx="70" cy="45" fill="#8c8cde" r="4"></circle>
+</svg>
+<!-- Stylized Tooltip -->
+<div class="absolute top-4 left-[65%] transform -translate-x-1/2 bg-slate-900 text-white p-3 rounded-lg shadow-2xl border border-primary/50 text-[10px] z-10">
+<p class="text-slate-400 font-bold uppercase mb-1">Oct 2023</p>
+<p class="text-sm font-bold">$59,820</p>
+<p class="text-emerald-400 flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[10px]">arrow_upward</span> 1.2%
+            </p>
+</div>
+<!-- Axis Labels -->
+<div class="absolute -bottom-6 w-full flex justify-between text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
+<span>Nov '22</span>
+<span>Feb '23</span>
+<span>May '23</span>
+<span>Aug '23</span>
+<span>Nov '23</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Additional Data Grid -->
+<section class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+<h4 class="text-sm font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">history</span>
+          Title History &amp; Alerts
+        </h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-primary/5 pb-2">
+<span class="text-sm text-slate-500">Ownership Changes</span>
+<span class="text-sm font-bold">1 Owner</span>
+</div>
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-primary/5 pb-2">
+<span class="text-sm text-slate-500">Accident Records</span>
+<span class="text-sm font-bold text-emerald-500">None Found</span>
+</div>
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-primary/5 pb-2">
+<span class="text-sm text-slate-500">Open Recalls</span>
+<span class="text-sm font-bold text-amber-500">1 Pending</span>
+</div>
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+<h4 class="text-sm font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+          Market Location Index
+        </h4>
+<div class="flex gap-4 items-center">
+<div class="h-24 w-24 bg-primary/10 rounded-lg flex items-center justify-center overflow-hidden">
+<!-- Placeholder for a map snippet -->
+<div class="bg-slate-300 dark:bg-slate-700 w-full h-full relative" data-location="Chicago, IL" style="">
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary to-transparent"></div>
+<span class="material-symbols-outlined absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-primary">location_on</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="text-xs text-slate-500 uppercase font-bold">Regional Demand</p>
+<p class="text-lg font-bold">Chicago, IL Metro</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+<p class="text-[10px] text-slate-400 mt-1 font-bold">High Demand Level (8.5/10)</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full bg-white border-t border-slate-200 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+<div class="max-w-5xl mx-auto flex justify-around p-3">
+<a class="flex flex-col items-center gap-1 text-primary group" href="#">
+<span class="material-symbols-outlined font-variation-fill group-hover:scale-110 transition-transform">description</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Report</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">trending_up</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Market</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">inventory_2</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
+</a>
+</div>
+</nav>
+</body></html>

@@ -27,9 +27,12 @@ export default function DashboardPage() {
   const [recentSearches, setRecentSearches] = useState<HistoryItem[]>([]);
   const [topDeals, setTopDeals] = useState<Array<{ segment: string; listing: import('@/lib/marketcheck').Listing; fmvAvg: number; savings: number }>>([]);
   const [loadingDeals, setLoadingDeals] = useState(true);
+  const [now, setNow] = useState<number>(0);
 
   useEffect(() => {
-    setRecentSearches(getSearches());
+    setTimeout(() => setNow(Date.now()), 0);
+    const t = setInterval(() => setNow(Date.now()), 60000);
+    setTimeout(() => setRecentSearches(getSearches()), 0);
 
     fetch('/api/top-deals')
       .then(res => res.json())
@@ -38,174 +41,174 @@ export default function DashboardPage() {
       })
       .catch(() => { })
       .finally(() => setLoadingDeals(false));
+
+    return () => clearInterval(t);
   }, []);
 
   return (
-    <div>
-      {/* Hero */}
-      <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.5, marginBottom: 8 }}>
-          Bienvenido, Advisor 👋
-        </h1>
-        <p style={{ fontSize: 15, color: 'var(--text-secondary)', maxWidth: 480 }}>
-          Tu plataforma de inteligencia vehicular. Datos en tiempo real de Marketcheck para negociar mejor.
-        </p>
-      </div>
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 md:space-y-8">
+      {/* Hero Section */}
+      <section className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">Bienvenido, Advisor</h2>
+          <p className="text-slate-400 mt-2 text-base md:text-lg">Inteligencia de mercado en tiempo real para tu inventario premium.</p>
+        </div>
+        <div className="flex gap-2">
+          <div className="flex items-center gap-2 px-4 py-2 bg-surface-dark border border-white/5 rounded-lg text-xs font-bold text-slate-400">
+            <span className="material-symbols-outlined text-sm">calendar_today</span>
+            Hoy
+          </div>
+        </div>
+      </section>
 
-      {/* Tool cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16, marginBottom: 32 }}>
-        {TOOLS.map(t => (
-          <Link key={t.href} href={t.href} style={{ textDecoration: 'none' }}>
-            <div className="card" style={{
-              padding: '22px 22px 18px',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              height: '100%',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-                <div style={{
-                  width: 44, height: 44, borderRadius: 12,
-                  background: `${t.color}18`,
-                  border: `1px solid ${t.color}30`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 22,
-                }}>
-                  {t.icon}
-                </div>
-                <span style={{ fontSize: 16, fontWeight: 700 }}>{t.title}</span>
-              </div>
-              <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 14, lineHeight: 1.6 }}>
-                {t.desc}
-              </p>
+      {/* Stats Grid */}
+      <section className="grid grid-cols-1 @xl:grid-cols-3 gap-4 md:gap-6">
+        <div className="card-gradient border border-white/5 p-5 md:p-6 rounded-2xl flex flex-col gap-2 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+            <span className="material-symbols-outlined text-[80px] md:text-[100px]">directions_car</span>
+          </div>
+          <p className="text-slate-400 text-xs md:text-sm font-semibold uppercase tracking-wider">Vehículos Activos</p>
+          <div className="flex items-baseline gap-3">
+            <h3 className="text-2xl md:text-3xl font-black text-white">8M+</h3>
+            <span className="text-accent-mint text-[10px] md:text-sm font-bold flex items-center">
+              <span className="material-symbols-outlined text-sm">trending_up</span> Diaria
+            </span>
+          </div>
+          <p className="text-slate-500 text-[10px] md:text-xs">Marketcheck API Nacional</p>
+        </div>
 
-            </div>
-          </Link>
-        ))}
-      </div>
+        <div className="card-gradient border border-white/5 p-5 md:p-6 rounded-2xl flex flex-col gap-2 relative overflow-hidden group">
+          <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+            <span className="material-symbols-outlined text-[80px] md:text-[100px]">storefront</span>
+          </div>
+          <p className="text-slate-400 text-xs md:text-sm font-semibold uppercase tracking-wider">Dealers Cubiertos</p>
+          <div className="flex items-baseline gap-3">
+            <h3 className="text-2xl md:text-3xl font-black text-white">45K+</h3>
+            <span className="text-accent-mint text-[10px] md:text-sm font-bold flex items-center">
+              <span className="material-symbols-outlined text-sm">trending_up</span> 10+ Años
+            </span>
+          </div>
+          <p className="text-slate-500 text-[10px] md:text-xs">Agencias en red certificadas</p>
+        </div>
 
-      {/* Top 3 Deals (Daily cached) */}
-      <div style={{ marginBottom: 32 }}>
-        <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 14, color: 'var(--text-secondary)' }}>
-          🔥 TOP 3 IMPERDIBLES
+        {/* Quick Tools Access Card */}
+        <div className="card-gradient border border-white/5 p-5 md:p-6 rounded-2xl flex flex-col gap-4 relative overflow-hidden">
+          <p className="text-slate-400 text-xs md:text-sm font-semibold uppercase tracking-wider">Acceso Rápido</p>
+          <div className="grid grid-cols-2 gap-3 h-full">
+            {TOOLS.map(t => (
+              <Link key={t.href} href={t.href} className="bg-white/5 hover:bg-white/10 border border-white/5 p-3 rounded-xl flex flex-col items-center justify-center text-center gap-2 transition-all group">
+                <span className="text-2xl group-hover:scale-110 transition-transform">{t.icon}</span>
+                <span className="text-xs font-bold text-slate-300 group-hover:text-white">{t.title}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Top 3 Deals */}
+      <section>
+        <div className="flex items-center justify-between mb-4 md:mb-6">
+          <h2 className="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+            <span className="material-symbols-outlined text-primary">local_fire_department</span>
+            Top 3 Imperdibles
+          </h2>
+          <span className="text-slate-500 text-xs font-semibold bg-white/5 px-2 py-1 rounded">24h Scan</span>
         </div>
 
         {loadingDeals ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {[1, 2, 3].map(i => (
-              <div key={i} className="card" style={{ padding: 16 }}>
-                <div className="skeleton" style={{ height: 20, width: '70%', marginBottom: 12 }}></div>
-                <div className="skeleton" style={{ height: 16, width: '40%' }}></div>
+              <div key={i} className="bg-surface-dark border border-white/10 rounded-2xl p-5">
+                <div className="skeleton h-32 w-full rounded-xl mb-4"></div>
+                <div className="skeleton h-6 w-3/4 mb-2"></div>
+                <div className="skeleton h-4 w-1/2"></div>
               </div>
             ))}
           </div>
         ) : topDeals.length > 0 ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 @2xl:grid-cols-3 gap-4 md:gap-6">
             {topDeals.map((deal, i) => {
               const lst = deal.listing;
               if (!lst) return null;
               const build = lst.build || {};
               const title = `${build.year || ''} ${build.make || ''} ${build.model || ''}`.trim();
+              const photo = lst.media?.photo_links?.[0] || 'https://lh3.googleusercontent.com/aida-public/AB6AXuDaYraoEM4VCVTiccmoolnphlDe_yI5VZqCVAC6PRDhhGSH6jEeXSphof_bnZd5U18JWbYJIKMEps0_NzcGfJO3a6l7Tl8G6JiUqIIAMmDeCGauNA4oEhghp2yT2C3bViBSe3AwZ5YhStDmIoLARI1shRfp5B2HI56aU-IYDYhFYZSL-nZlpsRiWt7JOlrEBNhc8JvJ66WkAcM_dpjn0Uc4JEiRUAvZx668yZJiozixqudKLNnKQX3z1BH7ZFexVGgsDt4igAdTCLXQ'; // Fallback to BMW Stitch image
 
               return (
-                <div key={i} className="card" style={{ padding: 16, border: '1px solid var(--border-color)', position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: -10, right: 16 }}>
-                    <span className="badge badge-accent" style={{ fontSize: 11, fontWeight: 700, padding: '4px 8px' }}>
+                <div key={i} className="bg-surface-dark border border-white/10 rounded-2xl overflow-hidden hover:border-primary/50 transition-all shadow-lg shadow-black/20 group flex flex-col">
+                  <div className="h-44 relative overflow-hidden bg-white/5">
+                    <img src={photo} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent opacity-80"></div>
+                    <div className="absolute top-3 left-3 bg-accent-mint text-background-dark text-[10px] font-black uppercase px-2 py-1 rounded shadow-lg">💰 Ahorro {formatPrice(deal.savings)}</div>
+                    <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md text-primary text-[10px] font-bold px-2 py-1 rounded-lg border border-primary/20">
                       {deal.segment}
-                    </span>
+                    </div>
                   </div>
-                  <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 4 }}>{title}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-                    <span style={{ fontSize: 18, fontWeight: 800, color: 'var(--text-primary)' }}>
-                      {formatPrice(lst.price)}
-                    </span>
-                    <span style={{ fontSize: 13, textDecoration: 'line-through', color: 'var(--text-muted)' }}>
-                      {formatPrice(deal.fmvAvg)}
-                    </span>
+                  <div className="p-5 flex-1 flex flex-col justify-between -mt-6 relative z-10">
+                    <div className="mb-4">
+                      <h4 className="text-white font-bold text-lg leading-tight mb-1">{title}</h4>
+                      <p className="text-slate-400 text-xs">{lst.miles ? `${lst.miles.toLocaleString()} mi` : 'Millas N/D'} • {lst.exterior_color || 'Color N/D'}</p>
+                    </div>
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <p className="text-slate-500 text-xs line-through">{formatPrice(deal.fmvAvg)} Avg</p>
+                        <p className="text-2xl font-black text-white">{formatPrice(lst.price)}</p>
+                      </div>
+                      <Link href={`/vin?v=${lst.vin || ''}`}>
+                        <button className="bg-primary/20 hover:bg-primary text-primary hover:text-white p-2 rounded-lg transition-all border border-primary/30 shadow-lg shadow-primary/10">
+                          <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+                        </button>
+                      </Link>
+                    </div>
                   </div>
-                  <div style={{ marginBottom: 12 }}>
-                    <span className="badge badge-green" style={{ fontSize: 12 }}>
-                      💰 Ahorro {formatPrice(deal.savings)} vs Mercado
-                    </span>
-                  </div>
-
-                  <Link href={`/vin?v=${lst.vin || ''}`} style={{ textDecoration: 'none' }}>
-                    <button className="btn btn-primary btn-sm" style={{ width: '100%' }}>
-                      Analizar VIN →
-                    </button>
-                  </Link>
                 </div>
               );
             })}
           </div>
         ) : (
-          <div className="card" style={{ padding: 16, textAlign: 'center', color: 'var(--text-muted)' }}>
-            No se encontraron oportunidades excepcionales hoy.
+          <div className="bg-surface-dark/50 border border-white/5 rounded-2xl p-8 text-center text-slate-500 font-medium">
+            No se encontraron oportunidades excepcionales hoy en el mercado rápido.
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Recent Searches */}
+      {/* Recent Searches Row */}
       {recentSearches.length > 0 && (
-        <div style={{ marginBottom: 32 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>
-              BÚSQUEDAS RECIENTES
-            </div>
-            <button
-              onClick={() => { clearSearches(); setRecentSearches([]); }}
-              className="btn btn-ghost btn-sm"
-              style={{ fontSize: 12, padding: '4px 8px', color: 'var(--text-muted)' }}
-            >
-              🗑️ Limpiar Historial
+        <section className="bg-surface-dark/50 border border-white/5 rounded-2xl p-5 md:p-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+
+          <div className="flex items-center justify-between mb-5 relative z-10">
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary">history</span>
+              Actividad Reciente
+            </h2>
+            <button onClick={() => { clearSearches(); setRecentSearches([]); }} className="text-xs font-semibold text-slate-500 hover:text-red-400 transition-colors bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-lg border border-white/5">
+              Limpiar Todo
             </button>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 relative z-10">
             {recentSearches.map((s, i) => (
-              <Link key={i} href={s.url} style={{ textDecoration: 'none' }}>
-                <div className="card" style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, transition: 'all 0.2s' }}>
-                  <div style={{
-                    width: 32, height: 32, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16,
-                    background: s.type === 'vin' ? 'rgba(34,211,165,0.1)' : 'rgba(124,110,250,0.1)'
-                  }}>
-                    {s.type === 'vin' ? '🧠' : s.type === 'filters' ? '📡' : '💬'}
-                  </div>
-                  <div style={{ overflow: 'hidden' }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                      {s.query}
+              <Link key={i} href={s.url}>
+                <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-primary/20 transition-all cursor-pointer group">
+                  <div className="flex items-center gap-3 md:gap-4 overflow-hidden">
+                    <div className={`w-10 h-10 shrink-0 rounded-lg flex items-center justify-center ${s.type === 'vin' ? 'bg-accent-mint/10 text-accent-mint' : 'bg-primary/10 text-primary'}`}>
+                      <span className="material-symbols-outlined text-[20px]">
+                        {s.type === 'vin' ? 'barcode_scanner' : 'search_check'}
+                      </span>
                     </div>
-                    <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>
-                      Hace {Math.max(0, Math.floor((Date.now() - s.timestamp) / 60000))} min
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-white truncate">{s.type === 'vin' ? `VIN: ${s.query}` : `"${s.query}"`}</p>
+                      <p className="text-[10px] text-slate-500 uppercase tracking-wider mt-0.5">{s.type === 'vin' ? 'Lookup' : 'Natural Search'} • Hace {now ? Math.max(0, Math.floor((now - s.timestamp) / 60000)) : 0} min</p>
                     </div>
                   </div>
+                  <span className="material-symbols-outlined text-slate-500 text-sm group-hover:text-primary transition-colors shrink-0 mr-2 group-hover:translate-x-1">arrow_forward</span>
                 </div>
               </Link>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
-      {/* Quick stats */}
-      <div className="card" style={{ padding: '18px 22px' }}>
-        <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 14, color: 'var(--text-secondary)' }}>
-          MARKETCHECK API — DATOS EN TIEMPO REAL
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 16 }}>
-          {[
-            { label: 'Vehículos Activos', value: '8M+', icon: '🚗' },
-            { label: 'Dealers Cubiertos', value: '45K+', icon: '🏪' },
-            { label: 'Años de Historial', value: '10+', icon: '📅' },
-            { label: 'Actualizaciones', value: 'Diaria', icon: '🔄' },
-          ].map(s => (
-            <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ fontSize: 20 }}>{s.icon}</span>
-              <div>
-                <div style={{ fontSize: 17, fontWeight: 800 }}>{s.value}</div>
-                <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{s.label}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

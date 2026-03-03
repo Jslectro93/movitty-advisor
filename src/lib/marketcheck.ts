@@ -43,6 +43,8 @@ export interface Listing {
   id?: string;
   vin?: string;
   price?: number;
+  heading?: string;
+  media?: { photo_links?: string[] };
   msrp?: number;
   miles?: number;
   dom?: number;

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Movitty Advisor Platform - Smart Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c8cde",
+                        "background-light": "#f8f9fa",
+                        "background-dark": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3d3a55;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+<!-- Header Navigation -->
+<header class="border-b border-slate-200 bg-white/90 backdrop-blur-md sticky top-0 z-50 px-4 py-3 shadow-sm">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-white">auto_awesome</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-800">Movitty <span class="text-primary font-medium">Advisor</span></h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-4 py-8 space-y-8">
+<!-- Central Search Control Box -->
+<section class="max-w-3xl mx-auto w-full">
+<div class="relative group">
+<div class="absolute -inset-1 bg-primary/10 rounded-xl blur-sm opacity-50 group-focus-within:opacity-100 transition duration-500"></div>
+<div class="relative flex flex-col bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
+<div class="flex items-start p-4 gap-4">
+<div class="mt-2 h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-primary/10">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-lg py-2 resize-none h-24 placeholder:text-slate-400 text-slate-800" placeholder="Describe what you're looking for... (e.g., 'corolla blanco 2025 en miami')">corolla blanco 2025 en miami</textarea>
+</div>
+<div class="flex items-center justify-between px-4 py-3 border-t border-slate-100 bg-slate-50/50">
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">image</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">attachment</span>
+</button>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all shadow-lg shadow-primary/20">
+<span>Analyze</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Analysis Chips -->
+<section class="space-y-3">
+<div class="flex items-center gap-2 px-1">
+<span class="material-symbols-outlined text-primary text-sm">auto_fix_high</span>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-600">Intent Extraction</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium text-primary">
+<span class="text-[12px] opacity-60">Year:</span> 2025
+                    <button class="material-symbols-outlined text-[14px]">close</button>
+</div>
+<div class="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium text-primary">
+<span class="text-[12px] opacity-60">Make:</span> Toyota
+                    <button class="material-symbols-outlined text-[14px]">close</button>
+</div>
+<div class="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium text-primary">
+<span class="text-[12px] opacity-60">Model:</span> Corolla
+                    <button class="material-symbols-outlined text-[14px]">close</button>
+</div>
+<div class="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium text-primary">
+<span class="text-[12px] opacity-60">Color:</span> White
+                    <button class="material-symbols-outlined text-[14px]">close</button>
+</div>
+<div class="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium text-primary">
+<span class="text-[12px] opacity-60">Location:</span> Miami, FL
+                    <button class="material-symbols-outlined text-[14px]">close</button>
+</div>
+<button class="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-primary">+ Add filter</button>
+</div>
+</section>
+<!-- Support Filters Row -->
+<section class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-[11px] font-bold text-slate-600 uppercase ml-1">Condition</label>
+<select class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:ring-primary focus:border-primary shadow-sm">
+<option>New &amp; Used</option>
+<option>New Only</option>
+<option>Certified Pre-owned</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[11px] font-bold text-slate-600 uppercase ml-1">Price Range</label>
+<select class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:ring-primary focus:border-primary shadow-sm">
+<option>$20k - $30k</option>
+<option>$30k - $40k</option>
+<option>$40k+</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[11px] font-bold text-slate-600 uppercase ml-1">Trim Level</label>
+<select class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:ring-primary focus:border-primary shadow-sm">
+<option>All Trims</option>
+<option>LE</option>
+<option>SE</option>
+<option>XSE</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[11px] font-bold text-slate-600 uppercase ml-1">Zip Code</label>
+<input class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:ring-primary focus:border-primary shadow-sm" type="text" value="33101"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[11px] font-bold text-slate-600 uppercase ml-1">Radius</label>
+<select class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:ring-primary focus:border-primary shadow-sm">
+<option>50 miles</option>
+<option>100 miles</option>
+<option>Anywhere</option>
+</select>
+</div>
+</section>
+<!-- Listing Cards Grid -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold flex items-center gap-2 text-slate-800">
+                    Market Opportunities 
+                    <span class="text-sm font-normal text-slate-400">(24 Results)</span>
+</h2>
+<div class="flex items-center gap-2">
+<button class="p-2 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 text-slate-400">
+<span class="material-symbols-outlined">list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white border border-slate-100 rounded-xl overflow-hidden group hover:border-primary/50 transition-all shadow-md hover:shadow-xl">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="White 2025 Toyota Corolla LE parked in showroom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbHZe1Y_VNm8doHPAvfZyMVn_OSyWP-C1wIKqZkTkPwc1L9PfCaP-yjMeNu_PggakJteJzsuRoBdP-jZDa3_cYh7FT6r1TpO93ettdDq6279slM04QVAe13Bb5uoSPYE_BuRlnRlTqjTQovjX22KW_jVLUeBrTG-ONsTEx3m87tA3l4SGtk0DI1HP5tGQyLWrb_wQLi--c_by20oZrRw8MlNePbY0M8CVvBVu5IdGRW2dRYPE_WlOoay4kwMnfHObafu_tXb5c0UXJ"/>
+</div>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="bg-orange-500 text-white text-[10px] font-bold uppercase px-2 py-1 rounded-md shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">local_fire_department</span> High Sales Pressure
+                            </span>
+</div>
+<button class="absolute top-3 right-3 h-8 w-8 bg-black/20 backdrop-blur-md text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<div class="p-4 space-y-4">
+<div>
+<h3 class="font-bold text-lg text-slate-800 group-hover:text-primary transition-colors">2025 Toyota Corolla LE</h3>
+<p class="text-sm text-slate-500">Super White • CVT Transmission</p>
+</div>
+<div class="grid grid-cols-2 gap-4 border-y border-slate-50 py-3">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Price</p>
+<p class="text-lg font-bold text-primary">$24,850</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Mileage</p>
+<p class="text-lg font-medium">12 mi</p>
+</div>
+</div>
+<div class="flex items-center justify-between text-sm text-slate-500">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> 3 DOM
+                            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Miami, FL
+                            </span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white border border-slate-100 rounded-xl overflow-hidden group hover:border-primary/50 transition-all shadow-md hover:shadow-xl">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="White 2025 Toyota Corolla Hybrid SE in front of modern building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxBWf_So4iMaO406JhJF63PpIfS_o2meJJGeyukeLb5lSIAEvmViivOj7Bpu6Hm8vUTHJDSra9qhqymnABCjCYKgRYJy65iYYjcBTag6mZomRVVQ7t2ssp8kkRHDTB4UDbQ2Y09_AP83UWnCpb9yZGfVz2DnvtCBqesC7z__97M5CB1UcB6TRDm-53tf4oVPj0q1aOk3an0Dt7nYXBVjHb5qPkJi2K7sp7YfFVggtdNzdEf4TGBH_fXWl2cNNDMhx833g9rOvkpElt"/>
+</div>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="bg-emerald-500 text-white text-[10px] font-bold uppercase px-2 py-1 rounded-md shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">payments</span> Competitive Price
+                            </span>
+</div>
+<button class="absolute top-3 right-3 h-8 w-8 bg-black/20 backdrop-blur-md text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<div class="p-4 space-y-4">
+<div>
+<h3 class="font-bold text-lg text-slate-800 group-hover:text-primary transition-colors">2025 Toyota Corolla SE Hybrid</h3>
+<p class="text-sm text-slate-500">Ice Cap • All-Wheel Drive</p>
+</div>
+<div class="grid grid-cols-2 gap-4 border-y border-slate-50 py-3">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Price</p>
+<p class="text-lg font-bold text-primary">$27,900</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Mileage</p>
+<p class="text-lg font-medium">45 mi</p>
+</div>
+</div>
+<div class="flex items-center justify-between text-sm text-slate-500">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> 12 DOM
+                            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Ft. Lauderdale
+                            </span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white border border-slate-100 rounded-xl overflow-hidden group hover:border-primary/50 transition-all shadow-md hover:shadow-xl">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="White 2025 Toyota Corolla XSE in city setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfmc5v1TzJI29xg7PeeFXvTiAaNlG5h8Ng0hRYJg66IsdyESR4itjI3hG9CjYHt3KnOTv6DKeK6SGh3jnBlMX22NfIO2KihvhHG1F4iVxZNvuLBhz-lHMbs4VFlLwtx_JoSj_J_Fw6rcyqegwxTsC4ONzpiOMXaP65vvd5k0dgaGZxzxVjbPMISHE8oPMLF6bTy4uo7ecpa3emfUocPwP7wV_oGAYyh10_oOHnFIEqXZEKTh8pTQ_MH-aRVtXbjcGJLbxfYr0_3Lnz"/>
+</div>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="bg-blue-500 text-white text-[10px] font-bold uppercase px-2 py-1 rounded-md shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> Rare Inventory
+                            </span>
+</div>
+<button class="absolute top-3 right-3 h-8 w-8 bg-black/20 backdrop-blur-md text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<div class="p-4 space-y-4">
+<div>
+<h3 class="font-bold text-lg text-slate-800 group-hover:text-primary transition-colors">2025 Toyota Corolla XSE</h3>
+<p class="text-sm text-slate-500">Blanco Perlado • Premium Pack</p>
+</div>
+<div class="grid grid-cols-2 gap-4 border-y border-slate-50 py-3">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Price</p>
+<p class="text-lg font-bold text-primary">$31,200</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Mileage</p>
+<p class="text-lg font-medium">0 mi</p>
+</div>
+</div>
+<div class="flex items-center justify-between text-sm text-slate-500">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> 1 DOM
+                            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Coral Gables
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Mobile Style / Fixed Bottom) -->
+<nav class="sticky bottom-0 w-full bg-white/95 border-t border-slate-200 backdrop-blur-lg px-6 py-3 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<div class="max-w-xl mx-auto flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Search</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Analytics</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Settings</span>
+</a>
+</div>
+</nav>
+</body></html>

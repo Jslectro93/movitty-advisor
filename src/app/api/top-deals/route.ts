@@ -30,9 +30,11 @@ export async function GET() {
             params.set('model', vic.model);
             params.set('year', vic.year);
             params.set('rows', '50');     // get enough sample size
-            params.set('sort_by', 'price'); // we want the cheapest
-            params.set('sort_order', 'asc');
+            params.set('car_type', 'used'); // only used cars have reliable transparent pricing
+            params.set('sort_by', 'dom'); // we want normal cars to sample FMV
+            params.set('sort_order', 'desc');
             params.set('price_min', '1000'); // filter out bad data
+            params.set('include', 'media'); // Fetch listing photos directly
 
             const r = await fetch(`${BASE_URL}/search/car/active?${params}`);
             if (!r.ok) return null;
@@ -42,20 +44,28 @@ export async function GET() {
             if (!listings.length) return null;
 
             const fmv = calcFMV(listings, data.num_found || listings.length);
-            if (!fmv || !fmv.avg) return null;
+            if (!fmv || !fmv.avg) {
+                return null;
+            }
 
-            // Find the listing that represents the absolute best deal
-            // The list is already sorted by price asc, so the cheapest valid listing is the first one
-            // Let's grab the cheapest one that is significantly below average market value
-            const bestDeal = listings.find(l => safeInt(l.price) > 0 && safeInt(l.price) < fmv.avg);
+            // We ensure it has a photo, has a price, and we sort by price asc to find the absolute lowest in this 50-car sample
+            const validWithPhotos = listings
+                .filter(l => safeInt(l.price) > 0 && l.media?.photo_links?.length)
+                .sort((a, b) => safeInt(a.price) - safeInt(b.price));
 
-            if (!bestDeal) return null;
+            const bestDeal = validWithPhotos[0];
+
+            if (!bestDeal) {
+                return null;
+            }
 
             const price = safeInt(bestDeal.price);
             const savings = fmv.avg - price;
 
             // Only keep it if it's an actual 'deal' (at least 5% off FMV or $1000)
-            if (savings < fmv.avg * 0.05 && savings < 1000) return null;
+            if (savings < fmv.avg * 0.05 && savings < 1000) {
+                return null;
+            }
 
             return {
                 segment: vic.label,

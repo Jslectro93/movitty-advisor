@@ -10,8 +10,9 @@ export async function GET(req: NextRequest) {
     params.set('rows', searchParams.get('rows') ?? '50');
     params.set('sort_by', 'dom');
     params.set('sort_order', 'desc');
+    params.set('include', 'media');
 
-    const fields = ['make', 'model', 'year', 'exterior_color', 'zip', 'radius'];
+    const fields = ['make', 'model', 'year', 'exterior_color', 'zip', 'radius', 'vin'];
     for (const f of fields) {
         const v = searchParams.get(f);
         if (v) params.set(f, v);

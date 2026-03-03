@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Movitty Advisor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c8cde",
+                        "accent-mint": "#10b981",
+                        "background-light": "#f8fafc",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "8px",
+                        "lg": "8px",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }</script>
+<style>
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(140, 140, 222, 0.1);
+        }
+        .card-gradient {
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light font-display text-slate-900 antialiased">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 glass h-full flex flex-col z-20 border-r border-slate-200">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1.5">
+<span class="material-symbols-outlined text-white text-2xl">auto_graph</span>
+</div>
+<div>
+<h1 class="text-xl font-black tracking-tight text-slate-900">Movitty</h1>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold">Advisor Pro</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-medium text-sm">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-medium text-sm">Markets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-medium text-sm">Dealers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-medium text-sm">Analytics</span>
+</a>
+</nav>
+<div class="p-4 border-t border-white/5 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">add</span>
+<span class="text-sm">New Analysis</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-background-light">
+<!-- Top Bar -->
+<header class="h-20 flex items-center justify-between px-8 border-b border-slate-200 sticky top-0 bg-white/80 backdrop-blur-md z-10">
+<div class="flex-1 max-w-xl">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+<input class="w-full bg-slate-100 border-none rounded-xl py-3 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary text-slate-900" placeholder="Search by VIN, Plate, or Natural Language (e.g. 'Electric SUVs under $50k')..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6 pl-8">
+<button class="relative p-2 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors">Alex Rivera</p>
+<p class="text-[10px] text-slate-500 font-medium">Senior Advisor</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary/30 p-0.5 overflow-hidden">
+<img alt="Profile" class="w-full h-full rounded-full object-cover" data-alt="Portrait of a professional business advisor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_5WgHXjOp0Z44d-TT1QlMrGJGN36y71aOkPGw4EfRGlGemipoCe4KmK1py3eryXrAU5vT-RhxtLyUz7KX0xxXEeLRwF-4pPms0CqnzuLxHx5DMXOMULfFbk2oViAZ2tSOvdGuvseET4KLXUP5gTq8TWaczCdiXWOG7CzGem3USeqEZtzwDDO42Nf7tAgrxjXoJjclMNJD8OicwO_0hnI1onAtBkLl_gS5LABHM25xoWCR9wggD3tmCcpz4259Dm04mAqVLG5JmUH9"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 max-w-[1400px] mx-auto w-full space-y-8">
+<!-- Hero Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-4xl font-black text-slate-900 tracking-tight">Welcome, Advisor</h2>
+<p class="text-slate-400 mt-2 text-lg">Real-time market intelligence for your premium inventory.</p>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-500">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                            Oct 24, 2023 - Today
+                        </div>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-gradient border border-white/5 p-6 rounded-2xl flex flex-col gap-2 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[100px]">directions_car</span>
+</div>
+<p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Total Vehicles</p>
+<div class="flex items-baseline gap-3">
+<h3 class="text-3xl font-black text-slate-900">8M+</h3>
+<span class="text-accent-mint text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12%
+                            </span>
+</div>
+<p class="text-slate-500 text-xs">Monitored across global indices</p>
+</div>
+<div class="card-gradient border border-white/5 p-6 rounded-2xl flex flex-col gap-2 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[100px]">handshake</span>
+</div>
+<p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Active Dealers</p>
+<div class="flex items-baseline gap-3">
+<h3 class="text-3xl font-black text-slate-900">45K+</h3>
+<span class="text-accent-mint text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 5%
+                            </span>
+</div>
+<p class="text-slate-500 text-xs">Verified certified partners</p>
+</div>
+<div class="card-gradient border border-white/5 p-6 rounded-2xl flex flex-col gap-2 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[100px]">location_on</span>
+</div>
+<p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Monitored Markets</p>
+<div class="flex items-baseline gap-3">
+<h3 class="text-3xl font-black text-slate-900">120+</h3>
+<span class="text-accent-mint text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 8%
+                            </span>
+</div>
+<p class="text-slate-500 text-xs">Expansion into Asia Pacific</p>
+</div>
+</section>
+<!-- Top 3 Imperdibles -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-4xl font-black text-slate-900 tracking-tight">
+<span class="material-symbols-outlined text-primary">local_fire_department</span>
+                            Top 3 Imperdibles
+                        </h2>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All Opportunities</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Car Card 1 -->
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-500">
+<div class="h-48 relative overflow-hidden">
+<img alt="Tesla Model 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern white Tesla Model 3 front profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA89x3raHzD6OR2NlW3u_4OBx_9mg17p57m8Yja19SCPtYZ1x_Epggh88fdaD-zUKnpd3MZwtfD_oF96c1OrpZ51cyrtTU1xpP8spcsrusJuIVXIDYVBMYFGwZ2H2m5lvIop4LuwcXZJXjU-LagVKoXIBo4KCgEHdzmBlDXidfE1Ek92VNu93ubZEIY1xK674Rr6NRoAefdK_5P7JPaYFvSOB1X6-3WC41Y_W011lWnaOSGALjOyMhu4qgHLBF2hMdsl9iR-mi5og3-"/>
+<div class="absolute top-4 left-4 bg-accent-mint/90 text-background-dark text-[10px] font-black uppercase px-2 py-1 rounded">💰 Ahorro de $4,500</div>
+<div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white p-1.5 rounded-full">
+<span class="material-symbols-outlined text-base">favorite</span>
+</div>
+</div>
+<div class="p-5 space-y-4">
+<div>
+<h4 class="text-slate-900 font-bold text-lg leading-tight">Tesla Model 3 Performance</h4>
+<p class="text-slate-500 text-xs">2023 • 12,500 mi • Electric</p>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-slate-500 text-xs line-through">$48,200</p>
+<p class="text-2xl font-black text-slate-900">$43,700</p>
+</div>
+<button class="bg-primary/20 hover:bg-primary text-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Car Card 2 -->
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-500">
+<div class="h-48 relative overflow-hidden">
+<img alt="BMW X5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Luxury charcoal BMW X5 in a city setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaYraoEM4VCVTiccmoolnphlDe_yI5VZqCVAC6PRDhhGSH6jEeXSphof_bnZd5U18JWbYJIKMEps0_NzcGfJO3a6l7Tl8G6JiUqIIAMmDeCGauNA4oEhghp2yT2C3bViBSe3AwZ5YhStDmIoLARI1shRfp5B2HI56aU-IYDYhFYZSL-nZlpsRiWt7JOlrEBNhc8JvJ66WkAcM_dpjn0Uc4JEiRUAvZx668yZJiozixqudKLNnKQX3z1BH7ZFexVGgsDt4igAdTCLXQ"/>
+<div class="absolute top-4 left-4 bg-accent-mint/90 text-background-dark text-[10px] font-black uppercase px-2 py-1 rounded">💰 Ahorro de $6,200</div>
+<div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white p-1.5 rounded-full">
+<span class="material-symbols-outlined text-base">favorite</span>
+</div>
+</div>
+<div class="p-5 space-y-4">
+<div>
+<h4 class="text-slate-900 font-bold text-lg leading-tight">BMW X5 xDrive40i</h4>
+<p class="text-slate-500 text-xs">2022 • 28,000 mi • Hybrid</p>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-slate-500 text-xs line-through">$62,500</p>
+<p class="text-2xl font-black text-slate-900">$56,300</p>
+</div>
+<button class="bg-primary/20 hover:bg-primary text-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Car Card 3 -->
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-500">
+<div class="h-48 relative overflow-hidden">
+<img alt="Porsche Taycan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Sleek silver Porsche Taycan electric sports car" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBICdTGgiWmz_czWcEzu97ON9id22AtGf-PxwV0obgB_HBJ9zwp_RSCKhxpw_Ho4Isc2VS0OdVvr02sQ-2O5RDu2OAKGzsC6o4MXVYVmrBVey2i0DnVaXOa-iYdp8uUn2Kzm3ucO1FA-sjw69Po94wQYzQLisNSpvayxS7eMnMexFFS3I81B7EX77qvOShiY4XzQjWBNZIYCCIso294J8Q16vPZe5mZI4s6lTterv9CbL6hga1p5jV3E9IBZSOQeykXEUvoe8QIuOq"/>
+<div class="absolute top-4 left-4 bg-accent-mint/90 text-background-dark text-[10px] font-black uppercase px-2 py-1 rounded">💰 Ahorro de $12,800</div>
+<div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white p-1.5 rounded-full">
+<span class="material-symbols-outlined text-base">favorite</span>
+</div>
+</div>
+<div class="p-5 space-y-4">
+<div>
+<h4 class="text-slate-900 font-bold text-lg leading-tight">Porsche Taycan 4S</h4>
+<p class="text-slate-500 text-xs">2021 • 15,200 mi • Electric</p>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-slate-500 text-xs line-through">$108,000</p>
+<p class="text-2xl font-black text-slate-900">$95,200</p>
+</div>
+<button class="bg-primary/20 hover:bg-primary text-primary hover:text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Searches and Activity -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="bg-white border border-slate-200 rounded-2xl p-6">
+<h2 class="text-4xl font-black text-slate-900 tracking-tight">
+<span class="material-symbols-outlined text-primary">history</span>
+                            Recent Activity
+                        </h2>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 hover:bg-slate-100 transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500">
+<span class="material-symbols-outlined">search_check</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white uppercase tracking-tight">VIN: 5YJ3E1EAXP20304</p>
+<p class="text-[10px] text-slate-500">Lookup • 2 mins ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-sm">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 hover:bg-slate-100 transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">"SUVs under $60k in Madrid area"</p>
+<p class="text-[10px] text-slate-500">Natural Language • 15 mins ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-sm">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 hover:bg-slate-100 transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-accent-mint/10 flex items-center justify-center text-accent-mint">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Full Market Report: BMW Series 4</p>
+<p class="text-[10px] text-slate-500">Generated • 1 hour ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-sm">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-2xl p-6">
+<div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-primary">analytics</span>
+</div>
+<h3 class="text-slate-900 font-bold text-lg">Predictive Market Insights</h3>
+<p class="text-slate-500 text-sm max-w-xs">Our AI suggests a 4.2% price increase in the luxury EV segment next month. Check the updated forecast.</p>
+<button class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 hover:bg-slate-100 transition-colors cursor-pointer">
+                            Explore Trends
+                        </button>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

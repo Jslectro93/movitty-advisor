@@ -2,7 +2,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { saveSearch } from '@/lib/history';
 import { parseQuery, type ParsedQuery } from '@/lib/parser';
-import { type Listing, type FMV, calcFMV, getOpportunityFlags, formatPrice, safeInt, daysSinceUnix } from '@/lib/marketcheck';
+import { type Listing, type FMV, calcFMV, formatPrice, safeInt } from '@/lib/marketcheck';
+
+import { GlassCard } from '@/components/ui/GlassCard';
+import { StaggerContainer, StaggerItem } from '@/components/ui/Stagger';
+import { AnimatedSkeleton } from '@/components/ui/AnimatedSkeleton';
+import { WatchlistButton } from '@/components/ui/WatchlistButton';
 
 const SUGGESTIONS = [
     'corolla blanco 2025 en boca raton',
@@ -23,9 +28,6 @@ export default function SmartSearchPage() {
     const [locationLabel, setLocationLabel] = useState('');
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
-    const [color, setColor] = useState('');
-    const [zip, setZip] = useState('');
-    const [radius, setRadius] = useState('100');
     const [sortKey, setSortKey] = useState<'dom' | 'price'>('dom');
 
     // Shared State
@@ -40,7 +42,7 @@ export default function SmartSearchPage() {
         const params = new URLSearchParams(window.location.search);
         const q = params.get('q');
         if (q) {
-            setQuery(q);
+            setTimeout(() => setQuery(q), 0);
             // Run search automatically
             setTimeout(() => {
                 const btn = document.getElementById('btn-search-chat');
@@ -129,8 +131,8 @@ export default function SmartSearchPage() {
     );
 
     return (
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div className="section-header mb-20">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="section-header mb-8 md:mb-12">
                 <div>
                     <h1 className="section-title">💬 Smart Search</h1>
                     <p className="section-desc">Encuentra y analiza inventario rápidamente</p>
@@ -154,38 +156,32 @@ export default function SmartSearchPage() {
                     </div>
 
                     {/* Filter Helpers */}
-                    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
-                        <select className="form-select" style={{ width: 'auto', minWidth: 140 }} onChange={e => { appendToQuery(e.target.value); e.target.value = ''; }}>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
+                        <select className="form-select w-full" onChange={e => { appendToQuery(e.target.value); e.target.value = ''; }}>
                             <option value="">Marca</option>
                             {MAKES.map(m => <option key={m} value={m}>{m}</option>)}
                         </select>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <input
-                                className="form-input"
-                                placeholder="Modelo"
-                                style={{ width: 120 }}
-                                onBlur={e => { if (e.target.value.trim()) { appendToQuery(e.target.value.trim()); e.target.value = ''; } }}
-                                onKeyDown={e => { if (e.key === 'Enter' && e.currentTarget.value.trim()) { e.preventDefault(); appendToQuery(e.currentTarget.value.trim()); e.currentTarget.value = ''; } }}
-                            />
-                        </div>
-                        <select className="form-select" style={{ width: 'auto', minWidth: 120 }} onChange={e => { appendToQuery(e.target.value); e.target.value = ''; }}>
+                        <input
+                            className="form-input w-full"
+                            placeholder="Modelo"
+                            onBlur={e => { if (e.target.value.trim()) { appendToQuery(e.target.value.trim()); e.target.value = ''; } }}
+                            onKeyDown={e => { if (e.key === 'Enter' && e.currentTarget.value.trim()) { e.preventDefault(); appendToQuery(e.currentTarget.value.trim()); e.currentTarget.value = ''; } }}
+                        />
+                        <select className="form-select w-full" onChange={e => { appendToQuery(e.target.value); e.target.value = ''; }}>
                             <option value="">Año</option>
                             {YEARS.map(y => <option key={y} value={y}>{y}</option>)}
                         </select>
-                        <select className="form-select" style={{ width: 'auto', minWidth: 140 }} onChange={e => { appendToQuery(e.target.value); e.target.value = ''; }}>
+                        <select className="form-select w-full" onChange={e => { appendToQuery(e.target.value); e.target.value = ''; }}>
                             <option value="">Color</option>
                             {COLORS_EN.map(c => <option key={c} value={c}>{c}</option>)}
                         </select>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <input
-                                className="form-input"
-                                placeholder="ZIP Code..."
-                                style={{ width: 120 }}
-                                onBlur={e => { if (e.target.value.length === 5) appendToQuery(`en ${e.target.value}`); }}
-                                onKeyDown={e => { if (e.key === 'Enter' && e.currentTarget.value.length === 5) { e.preventDefault(); appendToQuery(`en ${e.currentTarget.value}`); e.currentTarget.value = ''; } }}
-                                maxLength={5}
-                            />
-                        </div>
+                        <input
+                            className="form-input w-full"
+                            placeholder="ZIP Code..."
+                            onBlur={e => { if (e.target.value.length === 5) appendToQuery(`en ${e.target.value}`); }}
+                            onKeyDown={e => { if (e.key === 'Enter' && e.currentTarget.value.length === 5) { e.preventDefault(); appendToQuery(`en ${e.currentTarget.value}`); e.currentTarget.value = ''; } }}
+                            maxLength={5}
+                        />
                     </div>
 
                     {liveParsePreview && (
@@ -200,11 +196,11 @@ export default function SmartSearchPage() {
                         </div>
                     )}
 
-                    <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                        <button id="btn-search-chat" className="btn btn-primary btn-lg" onClick={handleSearchChat} disabled={loading || !query.trim()}>
+                    <div className="flex flex-wrap items-center gap-4 mt-6">
+                        <button id="btn-search-chat" className="btn btn-primary btn-lg w-full sm:w-auto" onClick={handleSearchChat} disabled={loading || !query.trim()}>
                             {loading ? <><span className="spinner" style={{ width: 16, height: 16 }} /> Buscando...</> : '⚡ Buscar Ahora'}
                         </button>
-                        <button className="btn btn-ghost" onClick={() => { setQuery(''); setParsed(null); setListings([]); setError(''); setLocationLabel(''); setFmv(null); }}>
+                        <button className="btn btn-ghost w-full sm:w-auto" onClick={() => { setQuery(''); setParsed(null); setListings([]); setError(''); setLocationLabel(''); setFmv(null); }}>
                             Limpiar
                         </button>
                     </div>
@@ -273,79 +269,113 @@ export default function SmartSearchPage() {
             {
                 listings.length > 0 && (
                     <>
-                        <div className="section-header mb-16 mt-8">
-                            <h2 style={{ fontSize: 15, fontWeight: 600 }}>Inventario Disponible</h2>
-                            <span className="badge badge-accent">
-                                {listings.length} mostrados
-                            </span>
+                        <div className="flex items-center justify-between mb-6 mt-8">
+                            <h3 className="text-xl font-semibold text-slate-100 flex items-center gap-2">
+                                Available Inventory
+                                <span className="text-sm font-normal text-slate-500 bg-slate-800 px-2 py-0.5 rounded-full">{listings.length} Results</span>
+                            </h3>
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm text-slate-400">Sort by:</span>
+                                <select className="bg-transparent border-none text-sm font-semibold text-primary focus:ring-0">
+                                    <option>Best Match</option>
+                                    <option>Lowest Price</option>
+                                </select>
+                            </div>
                         </div>
-                        <div className="grid-cards">
+
+                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {sortedListings.map((lst, i) => {
                                 const build = lst.build ?? {};
                                 const dealer = lst.dealer ?? lst.mc_dealership ?? {};
-                                const flags = getOpportunityFlags(lst, fmv);
+                                const fallbackImg = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDzsaimtASWsVrYKV5x2QYSO1SCOCGLCOgb9MhkgBuS_RRc2Gw2qulJPzvhLgSRlt-dnjFc4nyLinD6HrnS0n7Dn1sNyQYFowchisEvtNYTZtP_ApjwSpSIMddA0U4_C_Sh3k4t21EjaUOi5TeOKuhRF_iVRwi3Nm1Pnl__D57Ab160YIgMYid-_LgB2oM_G4vG2mU4359qJu-N6OoLWBnGt8ln5K1TSEaGnzsGuQyQ-p98R822--zPOTVzlNUHitML8nBrosHFEmCA';
+                                const photo = lst.media?.photo_links?.[0] || fallbackImg;
                                 const dom = safeInt(lst.dom);
+                                const fmvMedian = fmv?.median;
 
                                 return (
-                                    <div key={lst.id ?? i} className="listing-card">
-                                        <div className="listing-card-header">
-                                            <div>
-                                                <div className="listing-title">
-                                                    {build.year ?? parsed?.year} {build.make ?? parsed?.make} {build.model ?? parsed?.model} {build.trim ?? ''}
+                                    <StaggerItem key={lst.id ?? i}>
+                                        <GlassCard className="group flex flex-col h-full justify-between">
+                                            <div className="relative aspect-video bg-white/5">
+                                                <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={photo} alt={lst.heading || 'Car'} />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent opacity-60"></div>
+                                                <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+                                                    {lst.price && fmvMedian && lst.price < fmvMedian && (
+                                                        <span className="bg-accent-mint/90 backdrop-blur text-background-dark text-[10px] font-black px-2 py-1 rounded shadow-lg uppercase tracking-wide flex items-center gap-1">
+                                                            <span className="material-symbols-outlined text-xs">payments</span> Competitive Price
+                                                        </span>
+                                                    )}
+                                                    {dom > 45 && (
+                                                        <span className="bg-red-500/90 backdrop-blur text-white text-[10px] font-black px-2 py-1 rounded shadow-lg uppercase tracking-wide flex items-center gap-1">
+                                                            <span className="material-symbols-outlined text-xs">local_fire_department</span> High DOM
+                                                        </span>
+                                                    )}
                                                 </div>
-                                                <div className="listing-meta" style={{ marginTop: 4 }}>
-                                                    <span className="listing-meta-item">🎨 {lst.exterior_color ?? 'N/D'}</span>
-                                                    <span className="listing-meta-item">📏 {safeInt(lst.miles).toLocaleString()} mi</span>
-                                                    <span className="listing-meta-item" style={{ color: dom > 45 ? 'var(--red)' : dom > 30 ? 'var(--yellow)' : 'var(--text-secondary)' }}>
-                                                        ⏱ {dom} días
-                                                    </span>
+                                                <WatchlistButton listing={lst} />
+                                            </div>
+
+                                            <div className="p-5 flex-1 flex flex-col justify-between">
+                                                <div className="flex justify-between items-start mb-2 gap-4">
+                                                    <div>
+                                                        <h4 className="text-lg font-bold text-slate-100 group-hover:text-primary transition-colors line-clamp-1">
+                                                            {lst.heading || `${build.year ?? parsed?.year} ${build.make ?? parsed?.make} ${build.model ?? parsed?.model} ${build.trim ?? ''}`}
+                                                        </h4>
+                                                        <p className="text-sm text-slate-400 capitalize truncate">{lst.exterior_color || 'Color N/A'} • {dealer.city || 'Localiza'}, {dealer.state || ''}</p>
+                                                    </div>
+                                                    <span className="text-xl font-black text-primary shrink-0">{formatPrice(lst.price)}</span>
                                                 </div>
+
+                                                <div className="grid grid-cols-3 gap-2 border-y border-white/5 py-4 my-4">
+                                                    <div className="flex flex-col">
+                                                        <span className="text-[10px] font-bold text-slate-500 uppercase">Mileage</span>
+                                                        <span className="text-sm font-semibold text-slate-200">{safeInt(lst.miles).toLocaleString()} mi</span>
+                                                    </div>
+                                                    <div className="flex flex-col border-x border-white/5 px-3">
+                                                        <span className="text-[10px] font-bold text-slate-500 uppercase">DOM</span>
+                                                        <span className={`text-sm font-semibold ${dom > 60 ? 'text-red-400' : 'text-slate-200'}`}>
+                                                            {dom ? `${dom} Days` : '--'}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex flex-col text-right">
+                                                        <span className="text-[10px] font-bold text-slate-500 uppercase">Est. Margin</span>
+                                                        <span className={`text-sm font-semibold ${lst.price && fmvMedian && fmvMedian > lst.price ? 'text-green-400' : 'text-slate-400'}`}>
+                                                            {lst.price && fmvMedian && fmvMedian > lst.price ? `+${formatPrice(fmvMedian - lst.price)}` : '--'}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <button onClick={() => window.location.href = `/vin?vin=${lst.vin}`} className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold py-2 rounded-lg transition-all border border-primary/20">
+                                                    View Market Analysis
+                                                </button>
                                             </div>
-                                            <div className="listing-price">{formatPrice(lst.price)}</div>
-                                        </div>
-
-                                        {lst.msrp && lst.msrp !== lst.price && (
-                                            <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>MSRP: {formatPrice(lst.msrp)}</div>
-                                        )}
-
-                                        <div className="listing-dealer">
-                                            🏪 {dealer.name ?? 'N/D'} · {dealer.city}, {dealer.state}
-                                        </div>
-
-                                        {flags.length > 0 && (
-                                            <div className="listing-flags">
-                                                {flags.map(f => (
-                                                    <span key={f.label} className={`badge ${f.type === 'negotiation' ? 'badge-yellow' : f.type === 'competitive' ? 'badge-green' : 'badge-red'}`}>
-                                                        {f.type === 'negotiation' ? '🔥' : f.type === 'competitive' ? '💰' : '⚠️'} {f.label}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        )}
-
-                                        {lst.vdp_url && (
-                                            <a href={lst.vdp_url} target="_blank" rel="noopener" className="td-link" style={{ fontSize: 12 }}>
-                                                Ver en dealer →
-                                            </a>
-                                        )}
-                                    </div>
+                                        </GlassCard>
+                                    </StaggerItem>
                                 );
                             })}
-                        </div>
+                        </StaggerContainer>
                     </>
                 )
             }
 
             {
                 loading && (
-                    <div className="grid-cards mt-20">
+                    <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                         {[...Array(6)].map((_, i) => (
-                            <div key={i} className="listing-card">
-                                <div className="skeleton" style={{ height: 20, width: '70%', marginBottom: 12 }} />
-                                <div className="skeleton" style={{ height: 14, width: '50%', marginBottom: 8 }} />
-                                <div className="skeleton" style={{ height: 14, width: '80%' }} />
-                            </div>
+                            <StaggerItem key={i}>
+                                <GlassCard className="p-0">
+                                    <AnimatedSkeleton className="h-48 w-full rounded-none" />
+                                    <div className="p-5 space-y-4">
+                                        <AnimatedSkeleton className="h-6 w-3/4" />
+                                        <AnimatedSkeleton className="h-4 w-1/2" />
+                                        <div className="grid grid-cols-3 gap-2 py-4">
+                                            <AnimatedSkeleton className="h-10 w-full" />
+                                            <AnimatedSkeleton className="h-10 w-full" />
+                                            <AnimatedSkeleton className="h-10 w-full" />
+                                        </div>
+                                    </div>
+                                </GlassCard>
+                            </StaggerItem>
                         ))}
-                    </div>
+                    </StaggerContainer>
                 )
             }
         </div >
